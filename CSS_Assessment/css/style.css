@@ -1,0 +1,31 @@
+* {
+    text-align: center;
+    box-sizing: border-box;
+}
+#nav {
+    background: gray;
+    margin-bottom: 30px;
+}
+
+.left {
+    background: blue;
+    width: 50%;
+    float: left;
+    padding: 16% 0;
+    
+}
+.right {
+    background: red;
+    width: 25%;
+    padding: 16% 0;
+    float: right;
+    
+}
+#foot {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: green;
+    clear: both;
+   
+}

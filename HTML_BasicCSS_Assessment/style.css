@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  line-height: 1.75;
+  text-transform: uppercase;
+  font-family: arial, helvtica, sans-serif;
+  background-color: #3bb3c7;
+  text-align: center;
+  margin-top: 200px;
+  font-size: 12px;
+}
+h1 {
+  color: white;
+  font-size: 50px;
+  font-weight: bold;
+}
+.quote {
+  border-color: white;
+  background-color: #3bb3c7;
+  border-radius: 3px;
+  color: white;
+  box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	border:1px solid white;
+	display:inline-block;
+	cursor:pointer;
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+}
+
