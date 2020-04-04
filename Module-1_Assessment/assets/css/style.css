@@ -1,0 +1,53 @@
+body{
+  background-image: url("../images/webb.png");
+  box-sizing: border-box;
+}
+h1 {
+  color: #4aaaa5;
+}
+
+.container-fluid {
+  width: 70%;
+}
+.bio{
+  padding: 30px;
+  /* width: 70%; */
+}
+/* .header-strip{
+  background-color: white;
+  width: 100%;
+} */
+.navbar {
+  margin-bottom: 40px;
+  border-bottom: 2px solid #cccccc;
+}
+
+.navbar .navbar-brand{
+  background-color: #4aaaa5;
+  padding: 13px;
+  margin-left: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+ }
+
+.profile {
+  width: 100px;
+  margin-right: 20px;
+  float: left;
+}
+
+
+
+.footer-strip{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 65px;
+  background-color: gray;
+  border-top: 5px solid #4aaaa5;
+}
+.footer {
+  margin-top: 25px;
+  font-size: 12px;
+}
