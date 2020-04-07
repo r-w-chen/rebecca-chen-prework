@@ -1,91 +1,103 @@
-let words = ["BEETHOVEN", "MOZART", "BACH", "CHOPIN", "TCHAIKOVSKY", "DEBUSSY", "HANDEL", "BRAHMS", "HAYDN", "LISZT"];
-let wordsGuessedCorrectly = [];
+
 let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); //creates array of alphabet
-let underscoreHTML = "";
-let currentWord = "";
-let currentGuess = ""; //will display the letters as they are guessed
+let headerHTML = document.querySelector("#header");
+let winNumberHTML = document.querySelector("#winNumber");
+let currentWordHTML = document.querySelector("#currentWord");
+let guessesLeftHTML = document.querySelector("#guessesLeft");
+let lettersGuessedHTML = document.querySelector("#lettersGuessed");
+
 let game = {
   //game properties
+  words: ["BEETHOVEN", "MOZART", "BACH", "CHOPIN", "TCHAIKOVSKY", "DEBUSSY", "HANDEL", "BRAHMS", "HAYDN", "LISZT"],
+  wordsGuessedCorrectly: [],
+  currentWord : "",
+  currentGuess: "",
+  underscore: "",
   guessesLeft: 6,
   lettersGuessed: [],
   winNumber: 0,
 
   //game methods
-  generateWord: function() {
-    currentWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
-    if (wordsGuessedCorrectly.includes(currentWord)){
-    currentWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
+  generateRandomWord: function(){
+    this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
+  },
+  displayWord: function() {
+    this.generateRandomWord();
+    if (this.wordsGuessedCorrectly.includes(this.currentWord)){
+    this.generateRandomWord();
     }
-    for (i = 0; i < currentWord.length; i++) {
-      underscoreHTML += "_ "
+    for (i = 0; i < this.currentWord.length; i++) {
+      this.underscore += "_ "
     }
-    document.querySelector("#currentWord").innerText = underscoreHTML;
+    currentWordHTML.innerText = this.underscore;
 
-    return currentWord;
+    return this.currentWord;
   },
 
   updateWord: function(letter) { //replaces '_' with each correct letter
-    currentGuess = currentWord.split('').map(letter => (this.lettersGuessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
-    document.querySelector('#currentWord').innerHTML = currentGuess;
-    //will need to include code to advance to next level once there are no more "_".
+    this.currentGuess = this.currentWord.split('').map(letter => (this.lettersGuessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
+    currentWordHTML.innerHTML = this.currentGuess;
   },
   checkGuess: function(guess) {
-    if (currentWord.indexOf(guess) >= 0) {
+    if (this.currentWord.indexOf(guess) >= 0) {
       this.updateWord();
       // this.checkGameWon();
-    } else if (currentWord.indexOf(guess) === -1) {
+    } else if (this.currentWord.indexOf(guess) === -1) {
       this.guessesLeft--;
-      document.querySelector("#guessesRemaining").innerHTML = this.guessesLeft;
-      //check if the incorrect guess is also NOT in the guessedList
+      guessesLeftHTML.innerHTML = this.guessesLeft;
     }
   },
   showGuesses: function(guess) {
     if (this.lettersGuessed.includes(guess) === false) {
       this.lettersGuessed.push(guess);
-      document.querySelector("#lettersGuessedArray").innerHTML = this.lettersGuessed.join();
+      lettersGuessedHTML.innerHTML = this.lettersGuessed.join();
     }
   },
   checkGuessComplete: function(){
-    if (currentGuess === currentWord){
-      wordsGuessedCorrectly.push(currentWord);
-      words.splice(words.indexOf(currentWord), 1);
+    if (this.currentGuess === this.currentWord){
+      this.wordsGuessedCorrectly.push(this.currentWord);
+      this.words.splice(this.words.indexOf(this.currentWord), 1);
       this.winNumber++;
-      document.querySelector("#winCounter").innerHTML = this.winNumber;
+      winNumberHTML.innerHTML = this.winNumber;
       this.reset();
-      console.log(this.generateWord());
+      console.log(this.displayWord());
     }
   },
   reset: function(){
     alphabet = alphabet.concat(this.lettersGuessed);
     this.guessesLeft = 6;
     this.lettersGuessed = [];
-    underscoreHTML = "";
-    currentGuess = "";
-    currentWord = "";
+    this.underscore = "";
+    this.currentGuess = "";
+    this.currentWord = "";
+    guessesLeftHTML.innerHTML = this.guessesLeft;
+    lettersGuessedHTML.innerHTML = this.lettersGuessed;
   },
   checkGameWon: function(){
     if (this.guessesLeft === 0){
-      document.querySelector("#header").innerHTML = "Game Over! Press any key to restart."
-      words = words.concat(wordsGuessedCorrectly);
-      wordsGuessedCorrectly = [];
+      headerHTML.innerHTML = "Game Over! Press any key to restart."
+      this.words = this.words.concat(this.wordsGuessedCorrectly);
+      this.wordsGuessedCorrectly = [];
       this.winNumber = 0;
+      winNumberHTML.innerHTML = this.winNumber;
       this.reset();
-      console.log(this.generateWord());
+      console.log(this.displayWord());
     }
-    else if(words.length === 0){
-      document.querySelector("#header").innerHTML = "You won! Refresh the page to play again."
+    else if(this.wordsGuessedCorrectly.length === 10){
+      headerHTML.innerHTML = "You won! Refresh the page to play again."
     }
   }
 }
 
-console.log(game.generateWord());
+console.log(game.displayWord());
 document.addEventListener("keydown", function(event) {
   const pressedKey = event.key.toUpperCase();
   if (alphabet.includes(pressedKey)) {
     game.showGuesses(pressedKey);
+        game.checkGameWon();
     game.checkGuess(pressedKey);
     alphabet.splice(alphabet.indexOf(pressedKey), 1);
     game.checkGuessComplete();
-    game.checkGameWon();
+
   }
 });
