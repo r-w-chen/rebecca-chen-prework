@@ -1,5 +1,5 @@
 const words = ["beethoven", "mozart", "bach", "chopin", "tchaikovsky", "debussy", "handel", "brahms", "haydn", "liszt"]
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); //creates array of alphabet
+let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); //creates array of alphabet
 let underscoreHTML = "";
 let currentWord = "";
 let wordsGuessedCorrectly = []; //will need to use this to prevent currentWord from repeating already guessed words
@@ -29,6 +29,7 @@ let game = {
   checkGuess: function(guess) {
     if (currentWord.indexOf(guess) >= 0) {
       this.updateWord();
+      // this.checkGameWon();
     } else if (currentWord.indexOf(guess) === -1) {
       this.guessesLeft--;
       document.querySelector("#guessesRemaining").innerHTML = this.guessesLeft;
@@ -41,6 +42,23 @@ let game = {
       document.querySelector("#lettersGuessedArray").innerHTML = this.lettersGuessed.join();
     }
   },
+  checkGameWon: function(){
+    if (currentGuess === currentWord){
+      this.winNumber++;
+      document.querySelector("#winCounter").innerHTML = this.winNumber;
+      this.reset();
+      console.log(this.generateWord());
+    }
+  },
+  reset: function(){
+    alphabet = alphabet.concat(this.lettersGuessed);
+    this.guessesLeft = 12;
+    this.lettersGuessed = [];
+    underscoreHTML = "";
+    currentGuess = "";
+    currentWord = "";
+
+  }
 }
 //add this later
 // if (this.guessesLeft === 0){
@@ -54,5 +72,6 @@ document.addEventListener("keydown", function(event) {
     game.showGuesses(pressedKey);
     game.checkGuess(pressedKey);
     alphabet.splice((alphabet.indexOf(pressedKey)), 1);
+    game.checkGameWon();
   }
 });
