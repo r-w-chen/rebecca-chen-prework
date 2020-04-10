@@ -9,16 +9,16 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css"  href="assets/css/style.css">
 </head>
 
 <body class="d-flex flex-column h-100">
 <main role="main" class="flex-shrink-0">
-  <div class="container-fluid">
 
+    <!-- navigation bar -->
     <nav class="navbar navbar-expand-md navbar-light bg-white">
       <div class="name">
-            <span class="navbar-brand h1">Becky Chen</span>
+            <h1 class="navbar-brand h1">Becky Chen</h1>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -39,16 +39,16 @@
     </nav>
 
 
-
+    <!-- main content -->
     <div class="container bg-white bio">
       <div class="row">
-        <div class="col-md">
+        <div class="col">
           <h1>About Me</h1>
           <hr>
         </div>
       </div>
       <div class="row">
-        <div class="col-md">
+        <div class="col">
           <img class="profile" src="assets/images/profile.jpg" alt="profile.jpg">
           <p>Becky graduated from the University of Texas at Dallas in May 2018 with a B.S. in Accounting and Finance. While she enjoyed her studies in business, she was always curious about the world of technology.</p>
           <p>Right out of college, Becky started her first job at Frank Recruitment Group. It was there that she had the opportunity to learn more about what exciting career opportunities spanned across the technology field. After hearing other
@@ -59,13 +59,17 @@
       </div>
     </div>
 
-
-  </div>
 </main>
 
+  <!-- sticky footer -->
   <footer class="footer mt-auto py-3">
   <div class="container footer-container text-center">
-    <span class="text-white">Copyright ©</span>
+    <div class="row">
+      <div class="col">
+            <span class="text-white">Copyright ©</span>
+      </div>
+    </div>
+
   </div>
 </footer>
 </body>
