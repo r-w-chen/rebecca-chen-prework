@@ -36,10 +36,9 @@ let game = {
       this.underscore += "_ "
     }
     currentWordHTML.innerText = this.underscore;
-    console.log(game.currentWord);
   },
 
-  updateWord: function(letter) { //replaces '_' with each correct letter
+  updateWord: function(letter) { 
     this.currentGuess = this.currentWord.split('').map(letter => (this.lettersGuessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
     currentWordHTML.innerHTML = this.currentGuess;
   },

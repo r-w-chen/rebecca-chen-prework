@@ -15,9 +15,15 @@ body {
   font-size: 75px
 }
 img {
+  margin: 20px auto;
   width: 100%;
 }
 
 .invisible{
   display: none;
+}
+
+.game-window {
+  margin-top: 20px;
+  border: 2px solid #800020;
 }
