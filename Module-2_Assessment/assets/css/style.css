@@ -4,3 +4,20 @@ body {
   color: #800020;
   text-align: center;
 }
+
+#title {
+  margin-top: 20px;
+  margin-bottom: 60px;
+  background-color: #800020;
+  color: #e7d39f;
+}
+#title h1 {
+  font-size: 75px
+}
+img {
+  width: 100%;
+}
+
+.invisible{
+  display: none;
+}

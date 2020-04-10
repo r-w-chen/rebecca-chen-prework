@@ -1,6 +1,7 @@
 let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); //creates array of alphabet
+let audio = new Audio("");
 let headerHTML = document.querySelector("#header");
-let composerHTML = document.querySelector("#composer");
+let composerHTML = document.querySelector(".composer");
 let winNumberHTML = document.querySelector("#winNumber");
 let currentWordHTML = document.querySelector("#currentWord");
 let guessesLeftHTML = document.querySelector("#guessesLeft");
@@ -11,6 +12,7 @@ let game = {
   wordsGuessedCorrectly: [],
   currentWord: "",
   currentGuess: "",
+  previousWord: "",
   underscore: "",
   guessesLeft: 6,
   lettersGuessed: [],
@@ -41,9 +43,19 @@ let game = {
     this.currentGuess = this.currentWord.split('').map(letter => (this.lettersGuessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
     currentWordHTML.innerHTML = this.currentGuess;
   },
+  playSong: function(){
+    audio.pause();
+    audio = new Audio("assets/audio/" + this.currentWord + ".mp3");
+    audio.play();
+  },
   updateComposer: function(){
-    composerHTML.innerHTML = `Correct! Now playing ${this.currentWord}`;
-    //display composer name, song, and image
+    if(this.winNumber > 1){
+        document.querySelector("." + this.previousWord).classList.add("invisible");
+    }
+    document.querySelector("." + this.currentWord).classList.remove("invisible");
+    composerJPG.src = `assets/images/${this.currentWord}.jpg`
+    this.playSong();
+    this.previousWord = this.currentWord;
   },
   checkGuess: function(guess) {
     if (this.currentWord.indexOf(guess) >= 0) {
@@ -63,13 +75,14 @@ let game = {
 
   checkGuessComplete: function() {
     if (this.currentGuess === this.currentWord) {
+      this.winNumber++;
       this.updateComposer();
       this.wordsGuessedCorrectly.push(this.currentWord);
-      this.winNumber++;
-      winNumberHTML.innerHTML = this.winNumber;
+
+      winNumberHTML.innerHTML = ` ${this.winNumber}`;
       this.resetRound();
       this.displayWord();
-      //add function to display composer name, song, and image when this condition is met
+
     }
   },
 
@@ -84,15 +97,6 @@ let game = {
     lettersGuessedHTML.innerHTML = this.lettersGuessed;
   },
 
-  resetGame: function(){
-    this.resetRound();
-    this.words = this.words.concat(this.wordsGuessedCorrectly);
-    this.wordsGuessedCorrectly = [];
-    this.winNumber = 0;
-    winNumberHTML.innerHTML = this.winNumber;
-    this.displayWord();
-  },
-
   checkGameWon: function() {
     if (this.guessesLeft === 0) {
       headerHTML.innerHTML = "Game Over! Refresh the page to try again."
@@ -102,7 +106,9 @@ let game = {
   }
 }
 
+
 game.displayWord();
+
 document.addEventListener("keydown", function(event) {
   const pressedKey = event.key.toUpperCase();
   if (game.guessesLeft === 0 || game.wordsGuessedCorrectly.length === 10){
