@@ -13,6 +13,13 @@ h1 {
   font-size: 50px;
   font-weight: bold;
 }
+.corner-text {
+  font-size: 15px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
 .quote {
   border-color: white;
   background-color: #3bb3c7;
@@ -28,4 +35,3 @@ h1 {
 	padding:6px 24px;
 	text-decoration:none;
 }
-
